@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start a Project — Cynbit Scoping Wizard</title>
+  <meta name="description" content="Tell Cynbit what you want to build, get an indicative effort estimate, and book a discovery call in under two minutes.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#wizard">Skip to the form</a>
+
+  <header class="site-header">
+    <span class="wordmark">Cynbit<span class="dot">.</span></span>
+    <span class="proto-tag">Prototype · contact page improvement</span>
+  </header>
+
+  <main id="wizard" class="wizard">
+    <div class="intro">
+      <h1>Start your project</h1>
+      <p>Answer a few questions, get an indicative estimate, and book your discovery call. It takes about two minutes.</p>
+    </div>
+
+    <ol class="progress" aria-label="Progress">
+      <li data-step="1">Project</li>
+      <li data-step="2">Scope</li>
+      <li data-step="3">Contact</li>
+      <li data-step="4">Call</li>
+      <li data-step="5">Review</li>
+    </ol>
+
+    <p class="required-note">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+
+    <!-- Each step is its own <form>, so "Continue" is a real submit button and the
+         browser's constraint validation (and :user-invalid) runs per step. -->
+
+    <form class="step" data-step="1" id="step-1" hidden>
+      <h2 tabindex="-1">What do you need?</h2>
+      <fieldset class="cards" id="service-group">
+        <legend>Service <span aria-hidden="true">*</span></legend>
+        <!-- options rendered by app.js from lib/inquiry.js -->
+      </fieldset>
+      <fieldset class="cards compact" id="stage-group">
+        <legend>Where is the project today? <span aria-hidden="true">*</span></legend>
+      </fieldset>
+      <div class="actions"><button type="submit" class="primary">Continue</button></div>
+    </form>
+
+    <form class="step" data-step="2" id="step-2" hidden>
+      <h2 tabindex="-1">Scope and budget</h2>
+      <fieldset class="cards compact" id="budget-group">
+        <legend>Budget range <span aria-hidden="true">*</span></legend>
+      </fieldset>
+      <fieldset class="cards compact" id="timeline-group">
+        <legend>When do you want to start? <span aria-hidden="true">*</span></legend>
+      </fieldset>
+      <div class="field">
+        <label for="details">What should we build? <span aria-hidden="true">*</span></label>
+        <span id="details-hint" class="hint">The goal, who it's for, and anything that already exists. At least 30 characters.</span>
+        <textarea id="details" name="details" rows="5" required minlength="30" maxlength="2000"
+          aria-describedby="details-hint details-count" data-error="details-error"></textarea>
+        <div id="details-error" class="error-msg"><span role="img" aria-label="Error">⚠</span> Describe the project in at least 30 characters.</div>
+        <span id="details-count" class="hint counter" aria-live="off">0 / 2000</span>
+      </div>
+      <div class="actions">
+        <button type="button" class="ghost" data-back>Back</button>
+        <button type="submit" class="primary">Continue</button>
+      </div>
+    </form>
+
+    <form class="step" data-step="3" id="step-3" hidden>
+      <h2 tabindex="-1">How can we reach you?</h2>
+      <div class="grid-2">
+        <div class="field">
+          <label for="name">Full name <span aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required maxlength="80" data-error="name-error">
+          <div id="name-error" class="error-msg"><span role="img" aria-label="Error">⚠</span> Enter your full name.</div>
+        </div>
+        <div class="field">
+          <label for="email">Work email <span aria-hidden="true">*</span></label>
+          <span id="email-hint" class="hint">Format: you@company.com</span>
+          <input id="email" name="email" type="email" autocomplete="email" required maxlength="254"
+            pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}" aria-describedby="email-hint" data-error="email-error">
+          <div id="email-error" class="error-msg"><span role="img" aria-label="Error">⚠</span> Enter an email address in the format you@company.com.</div>
+        </div>
+        <div class="field">
+          <label for="company">Company <span class="optional">(optional)</span></label>
+          <input id="company" name="company" type="text" autocomplete="organization" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="phone">Phone <span class="optional">(optional)</span></label>
+          <span id="phone-hint" class="hint">Include your country code, e.g. +91 98765 43210</span>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20"
+            pattern="\+?[0-9 ()\-]{7,20}" aria-describedby="phone-hint" data-error="phone-error">
+          <div id="phone-error" class="error-msg"><span role="img" aria-label="Error">⚠</span> Enter a phone number with digits only, for example +91 98765 43210.</div>
+        </div>
+      </div>
+      <!-- Honeypot: hidden from people, tempting to bots. The server rejects it if filled. -->
+      <div class="hp" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="field check">
+        <input id="consent" name="consent" type="checkbox" required data-error="consent-error">
+        <label for="consent">I agree that Cynbit may contact me about this inquiry, as described in the <a href="https://cynbit.in/privacy" target="_blank" rel="noopener">privacy policy</a>. <span aria-hidden="true">*</span></label>
+        <div id="consent-error" class="error-msg"><span role="img" aria-label="Error">⚠</span> Agree to be contacted so we can reply.</div>
+      </div>
+      <div class="actions">
+        <button type="button" class="ghost" data-back>Back</button>
+        <button type="submit" class="primary">Continue</button>
+      </div>
+    </form>
+
+    <form class="step" data-step="4" id="step-4" hidden>
+      <h2 tabindex="-1">Book your discovery call</h2>
+      <p class="lead">A free 30-minute call with an engineer. Times are shown in <strong id="tz-name">your timezone</strong>.</p>
+      <div id="slot-days" class="slot-days"><!-- rendered by app.js --></div>
+      <div class="actions">
+        <button type="button" class="ghost" data-back>Back</button>
+        <button type="button" class="ghost" id="skip-call">Skip, just email me</button>
+        <button type="submit" class="primary">Continue</button>
+      </div>
+    </form>
+
+    <form class="step" data-step="5" id="step-5" hidden>
+      <h2 tabindex="-1">Review and send</h2>
+      <section class="estimate" aria-labelledby="estimate-title">
+        <h3 id="estimate-title">Indicative estimate</h3>
+        <p class="estimate-range" id="estimate-range"></p>
+        <p id="estimate-team"></p>
+        <p id="estimate-warning" class="warning" hidden></p>
+        <p class="fine">A rough guide based on similar projects, not a quote. You'll get a written proposal after the call.</p>
+      </section>
+      <dl class="summary" id="summary"></dl>
+      <div id="send-status" class="send-status" role="alert" hidden></div>
+      <div class="actions">
+        <button type="button" class="ghost" data-back>Back</button>
+        <button type="submit" class="primary" id="send-btn">Send inquiry</button>
+      </div>
+    </form>
+
+    <section class="step done" data-step="6" id="step-6" hidden aria-labelledby="done-title">
+      <h2 id="done-title" tabindex="-1">Thanks, <span id="done-name"></span>. We've got it.</h2>
+      <p>Your reference is <strong id="done-ref"></strong>. Quote it if you contact us about this inquiry.</p>
+      <div id="done-call"></div>
+      <h3>What happens next</h3>
+      <ol class="next-steps">
+        <li>An engineer reviews your brief within 24 hours.</li>
+        <li id="next-call-step">We email you a meeting link for your call.</li>
+        <li>After the call you get a written proposal with a fixed scope.</li>
+      </ol>
+      <div class="actions"><button type="button" class="ghost" id="start-over">Start another inquiry</button></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Prefer email? <a href="mailto:opportunities@cynbit.in">opportunities@cynbit.in</a></p>
+  </footer>
+</body>
+</html>
