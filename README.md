@@ -4,7 +4,7 @@ A guided replacement for the contact form on [cynbit.in/contact](https://cynbit.
 Visitors describe their project in four short steps, see an indicative effort estimate,
 and book a 30-minute discovery call, all in about two minutes.
 
-**Live demo:** _add your Vercel URL here_
+**Live demo:** https://cynbit-scoping-wizard.vercel.app
 **Technical report:** [REPORT.md](REPORT.md)
 
 ## Features
