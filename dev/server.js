@@ -1,14 +1,15 @@
 // Zero-dependency local dev server: serves the static site and routes
 // /api/inquiry to the same handler Vercel runs in production.
-// Usage: node server.js   (then open http://localhost:3000)
+// Usage: npm run dev   (then open http://localhost:3000)
+// Lives in dev/ (not the repo root) so Vercel doesn't mistake it for the app's server.
 
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import * as inquiry from './api/inquiry.js';
+import * as inquiry from '../api/inquiry.js';
 
-const root = fileURLToPath(new URL('.', import.meta.url));
+const root = fileURLToPath(new URL('..', import.meta.url));
 const port = Number(process.env.PORT) || 3000;
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.json': 'application/json' };
 
@@ -31,7 +32,7 @@ createServer(async (req, res) => {
   }
 
   const rel = normalize(decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname)).replace(/^([/\\])+/, '');
-  if (rel.startsWith('..') || /(^|[/\\])(api|test|node_modules)([/\\]|$)|server\.js$/.test(rel)) {
+  if (rel.startsWith('..') || /(^|[/\\])(api|test|dev|node_modules|\.git)([/\\]|$)/.test(rel)) {
     res.writeHead(404).end('Not found');
     return;
   }

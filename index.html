@@ -7,7 +7,7 @@
   <meta name="description" content="Tell Cynbit what you want to build, get an indicative effort estimate, and book a discovery call in under two minutes.">
   <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="app.js"></script>
+  <script type="module" src="wizard.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#wizard">Skip to the form</a>
@@ -40,7 +40,7 @@
       <h2 tabindex="-1">What do you need?</h2>
       <fieldset class="cards" id="service-group">
         <legend>Service <span aria-hidden="true">*</span></legend>
-        <!-- options rendered by app.js from lib/inquiry.js -->
+        <!-- options rendered by wizard.js from lib/inquiry.js -->
       </fieldset>
       <fieldset class="cards compact" id="stage-group">
         <legend>Where is the project today? <span aria-hidden="true">*</span></legend>
@@ -116,7 +116,7 @@
     <form class="step" data-step="4" id="step-4" hidden>
       <h2 tabindex="-1">Book your discovery call</h2>
       <p class="lead">A free 30-minute call with an engineer. Times are shown in <strong id="tz-name">your timezone</strong>.</p>
-      <div id="slot-days" class="slot-days"><!-- rendered by app.js --></div>
+      <div id="slot-days" class="slot-days"><!-- rendered by wizard.js --></div>
       <div class="actions">
         <button type="button" class="ghost" data-back>Back</button>
         <button type="button" class="ghost" id="skip-call">Skip, just email me</button>

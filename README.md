@@ -38,9 +38,10 @@ npm test        # 10 unit + API tests (node:test)
 ```
 index.html          markup: one <form> per step
 styles.css          design tokens, light/dark, validation states
-app.js              wizard logic, slots, review, submit
+wizard.js           wizard logic, slots, review, submit
 lib/inquiry.js      shared rules: validation, estimate, slots, ICS (browser + server)
 api/inquiry.js      Vercel Function: POST /api/inquiry
-server.js           zero-dependency local dev server
+dev/server.js       zero-dependency local dev server (outside the root so Vercel doesn't treat it as the app)
+vercel.json         pins the "Other" preset: static files + api/ functions
 test/               node:test suite
 ```
